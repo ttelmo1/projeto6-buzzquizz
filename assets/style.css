@@ -108,3 +108,9 @@ input:focus {
   color: black;
   font-style: normal;
 }
+
+h3 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+}
