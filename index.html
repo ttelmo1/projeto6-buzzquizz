@@ -13,6 +13,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400;1,700&display=swap"
         rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -20,68 +22,21 @@
         <h1>BuzzQuizz</h1>
     </header>
 
-    <div class="container-tela-1">
-        <div class="spacing"></div>
-        <section>
-            <div class="empty-user-quizzes">
-                <span>Você não criou nenhum<br />quizz ainda :</span>
-                <button>
-                    Criar Quizz
-                </button>
-            </div>
-            <div class="filled-user-quizzes hidden">
-                <div class="title-user-quizzes">
-                    <h3>Seus Quizzes</h3>
-                    <ion-icon name="add-circle"></ion-icon>
-                </div>
-                <div class="quizzes"></div>
-            </div>
-        </section>
-        <section class="all-quizzes">
+    <div class="main-content">
+        <!-- <div class="spacing"></div> -->
+        <div class="myQuizzes">
+        </div>
+        <section class="allQuizzes">
             <h3>Todos os Quizzes</h3>
             <div class="quizzes">
-                <div class="quizz">
-                    <img src="img/preguica.png" alt="imagem-quizz">
-                    <div class="texto-imagem">
-                        Acerte os personagens corretos dos Simpsons e prove seu amor!
-                    </div>
-                </div>
-                <div class="quizz">
-                    <img src="img/preguica.png" alt="imagem-quizz">
-                    <div class="texto-imagem">
-                        O quanto você é de boas?
-                    </div>
-                </div>
-                <div class="quizz">
-                    <img src="img/simpson.png" alt="imagem-quizz">
-                    <div class="texto-imagem">
-                        Acerte os personagens corretos dos Simpsons e prove seu amor!
-                    </div>
-                </div>
-                <div class="quizz">
-                    <img src="img/preguica.png" alt="imagem-quizz">
-                    <div class="texto-imagem">
-                        O quanto você é de boas?
-                    </div>
-                </div>
-                <div class="quizz">
-                    <img src="img/simpson.png" alt="imagem-quizz">
-                    <div class="texto-imagem">
-                        Acerte os personagens corretos dos Simpsons e prove seu amor!
-                    </div>
-                </div>
-                <div class="quizz">
-                    <img src="img/preguica.png" alt="imagem-quizz">
-                    <div class="texto-imagem">
-                        O quanto você é de boas?
-                    </div>
-                </div>
+                
             </div>
         </section>
     </div>
+    <div class="insideQuizz"></div>
     <div class="quizCreation">
-        <div class="spacing"></div> <!-- espaçamento do header -->
-        <section class="infoQuizz">
+        <!-- <div class="spacing"></div> espaçamento do header -->
+        <!-- <section class="infoQuizz">
             <h3> Comece pelo começo </h3>
             <li class="infoAnswers">
                 <div>
@@ -92,10 +47,10 @@
                 </div>
             </li>
             <button> Prosseguir pra criar perguntas </button>
-        </section>
+        </section> -->
         <div class="spacing"></div>
         <section class="infoQuizz">
-            <h3>Crie suas perguntas</h3>
+            <!-- <h3>Crie suas perguntas</h3>
             <li class="infoAnswers">
                 <div>
                     <h3 class="aside-text">Pergunta 1</h3>
@@ -128,9 +83,9 @@
                     <input placeholder="   Resposta Incorreta  " type="text" />
                     <input placeholder="   URL da imagem  " type="url" />
                 </div>
-            </li>
+            </li> -->
 
-            <li class="infoAnswers">
+            <!-- <li class="infoAnswers">
                 <div>
                     <h3 class="aside-text">Pergunta 2</h3>
                     <div class="spacing2"></div> 
@@ -161,8 +116,8 @@
                     <input placeholder="   Resposta Incorreta  " type="text" />
                     <input placeholder="   URL da imagem  " type="url" />
                 </div>
-            </li>
-            <li class="infoAnswers">
+            </li> -->
+            <!-- <li class="infoAnswers">
                 <div>
                     <h3 class="aside-text">Pergunta 3</h3>
                     <div class="spacing2"></div> 
@@ -192,10 +147,10 @@
                     <input placeholder="   URL da imagem  " type="url" />
                 </div>
             </li>
-            <button>Prosseguir pra criar perguntas</button>
+            <button>Prosseguir pra criar perguntas</button> -->
         </section>
-        <div class="spacing"></div>
-        <section class="infoQuizz">
+        <!-- <div class="spacing"></div> -->
+        <!-- <section class="infoQuizz">
             <h3>Agora decida o nível</h3>
             <li class="infoAnswers">
                 <div>
@@ -221,10 +176,10 @@
                 </div>
 
             </li>
-        </section>
-        <div class="spacing"></div>    <!-- espaçamento do header -->    
+        </section> -->
+        <!-- <div class="spacing"></div>    espaçamento do header     -->
       <section class="infoQuizz"> 
-          <h3> Seu Quizz está pronto!!! </h3>
+          <!-- <h3> Seu Quizz está pronto!!! </h3>
               <li class="infoAnswers">
                   <div>
                      <img src="img/Rectangle.png" alt="">
@@ -232,7 +187,7 @@
               </li>
               <button> Acessar o Quizz </button>
               <div class="spacing1"></div> 
-              <button> Voltar para o home </button>
+              <button> Voltar para o home </button> -->
       </section>
 </body>
 
