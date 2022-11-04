@@ -1,22 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buzz Quizz</title>
-    <link rel="stylesheet" href="./assets/reset.css">
-    <link rel="stylesheet" href="./assets/style.css">
-    <script src="script.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuzzQuizz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="assets/reset.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400;1,700&display=swap"
+        rel="stylesheet" />
 </head>
+
 <body>
     <header>
         <h1>BuzzQuizz</h1>
     </header>
-    <main id="container" class="main-content">
-        <div class="myQuizzes"></div>
-        <div class="allQuizzes" id="allQuizzes"></div>
-    </main>
+
+    <div class="container-tela-1">
+        <div class="spacing"></div>
+        <section>
+            <div class="empty-user-quizzes">
+                <span>Você não criou nenhum<br />quizz ainda :</span>
+                <button>
+                    Criar Quizz
+                </button>
+            </div>
+            <div class="filled-user-quizzes hidden">
+                <div class="title-user-quizzes">
+                    <h3>Seus Quizzes</h3>
+                    <ion-icon name="add-circle"></ion-icon>
+                </div>
+                <div class="quizzes"></div>
+            </div>
+        </section>
+        <section class="all-quizzes">
+            <h3>Todos os Quizzes</h3>
+            <div class="quizzes">
+                <div class="quizz">
+                    <img src="img/preguica.png" alt="imagem-quizz">
+                    <div class="texto-imagem">
+                        Acerte os personagens corretos dos Simpsons e prove seu amor!
+                    </div>
+                </div>
+                <div class="quizz">
+                    <img src="img/preguica.png" alt="imagem-quizz">
+                    <div class="texto-imagem">
+                        O quanto você é de boas?
+                    </div>
+                </div>
+                <div class="quizz">
+                    <img src="img/simpson.png" alt="imagem-quizz">
+                    <div class="texto-imagem">
+                        Acerte os personagens corretos dos Simpsons e prove seu amor!
+                    </div>
+                </div>
+                <div class="quizz">
+                    <img src="img/preguica.png" alt="imagem-quizz">
+                    <div class="texto-imagem">
+                        O quanto você é de boas?
+                    </div>
+                </div>
+                <div class="quizz">
+                    <img src="img/simpson.png" alt="imagem-quizz">
+                    <div class="texto-imagem">
+                        Acerte os personagens corretos dos Simpsons e prove seu amor!
+                    </div>
+                </div>
+                <div class="quizz">
+                    <img src="img/preguica.png" alt="imagem-quizz">
+                    <div class="texto-imagem">
+                        O quanto você é de boas?
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="quizCreation">
+        <div class="spacing"></div> <!-- espaçamento do header -->
+        <section class="infoQuizz">
+            <h3> Comece pelo começo </h3>
+            <li class="infoAnswers">
+                <div>
+                    <input placeholder="   Título do seu quizz  " type="text">
+                    <input placeholder="   URL da imagem do seu quizz  " type="url">
+                    <input placeholder="   Quantidade de perguntas do quizz   " type="numeric">
+                    <input placeholder="   Quantidade de níveis do quiz  " type="numeric">
+                </div>
+            </li>
+            <button> Prosseguir pra criar perguntas </button>
+        </section>
+        <div class="spacing"></div>
+        <section class="infoQuizz">
+            <h3>Crie suas perguntas</h3>
+            <li class="infoAnswers">
+                <div>
+                    <h3 class="aside-text">Pergunta 1</h3>
+                    <div class="spacing2"></div>
+                    <input placeholder="   Texto da pergunta  " type="text" />
+                    <input placeholder="   Cor de fundo da pergunta  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Resposta Correta</h3>
+                    <div class="spacing1"></div> 
+                    <div class="spacing1"></div> 
+                    <input placeholder="   Resposta Correta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Resposta Incorreta</h3>
+                    <div class="spacing1"></div> 
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div class="spacing1"></div>
+                <div class="spacing1"></div> 
+                <div>
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div class="spacing1"></div>
+                <div class="spacing1"></div> 
+                <div>
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+            </li>
+
+            <li class="infoAnswers">
+                <div>
+                    <h3 class="aside-text">Pergunta 2</h3>
+                    <div class="spacing2"></div> 
+                    <input placeholder="   Texto da pergunta  " type="text" />
+                    <input placeholder="   Cor de fundo da pergunta  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Resposta Correta</h3>
+                    <div class="spacing1"></div> 
+                    <div class="spacing1"></div> 
+                    <input placeholder="   Resposta Correta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Resposta Incorreta</h3>
+                    <div class="spacing1"></div> 
+                    <div class="spacing1"></div> 
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div class="spacing1"></div>
+                <div>
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div class="spacing1"></div>
+                <div>
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+            </li>
+            <li class="infoAnswers">
+                <div>
+                    <h3 class="aside-text">Pergunta 3</h3>
+                    <div class="spacing2"></div> 
+                    <input placeholder="   Texto da pergunta  " type="text" />
+                    <input placeholder="   Cor de fundo da pergunta  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Resposta Correta</h3>
+                    <div class="spacing1"></div> 
+                    <input placeholder="   Resposta Correta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Resposta Incorreta</h3>
+                    <div class="spacing1"></div> 
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div class="spacing1"></div>
+                <div>
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+                <div class="spacing1"></div>
+                <div>
+                    <input placeholder="   Resposta Incorreta  " type="text" />
+                    <input placeholder="   URL da imagem  " type="url" />
+                </div>
+            </li>
+            <button>Prosseguir pra criar perguntas</button>
+        </section>
+        <div class="spacing"></div>
+        <section class="infoQuizz">
+            <h3>Agora decida o nível</h3>
+            <li class="infoAnswers">
+                <div>
+                    <h3 class="aside-text">Nível 1</h3>
+                    <input placeholder="   Título do nível  " type="text" />
+                    <input placeholder="   % de acerto mínima  " type="url" />
+                    <input placeholder="   URL da imagem nível  " type="url" />
+                    <input placeholder="   Descrição do nível  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Nível 2</h3>
+                    <input placeholder="   Título do nível  " type="text" />
+                    <input placeholder="   % de acerto mínima  " type="url" />
+                    <input placeholder="   URL da imagem nível  " type="url" />
+                    <input placeholder="   Descrição do nível  " type="url" />
+                </div>
+                <div>
+                    <h3 class="aside-text">Nível 3</h3>
+                    <input placeholder="   Título do nível  " type="text" />
+                    <input placeholder="   % de acerto mínima  " type="url" />
+                    <input placeholder="   URL da imagem nível  " type="url" />
+                    <input placeholder="   Descrição do nível  " type="url" />
+                </div>
+
+            </li>
+        </section>
+        <div class="spacing"></div>    <!-- espaçamento do header -->    
+      <section class="infoQuizz"> 
+          <h3> Seu Quizz está pronto!!! </h3>
+              <li class="infoAnswers">
+                  <div>
+                     <img src="img/Rectangle.png" alt="">
+                  </div>
+              </li>
+              <button> Acessar o Quizz </button>
+              <div class="spacing1"></div> 
+              <button> Voltar para o home </button>
+      </section>
 </body>
+
 </html>
