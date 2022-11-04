@@ -1,11 +1,17 @@
+//Salvando API em uma constante
 const urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/"
 
+
+//Variaveis globais
 let container = document.getElementsByClassName("main-content")
 let myQuizzes = document.getElementsByClassName("myQuizzes")
 let allQuizzes = document.getElementsByClassName("allQuizzes")
 
+
+//Quizzes salvos no PC do usuário
 let myQuizzesSaved = localStorage.getItem("myQuizId")
 
+//Renderizar quizzes do usuário
 function renderMyQuizzes() {
 
     container.innerHTML = '';
@@ -158,7 +164,40 @@ function createQuizz2(){
             <input placeholder="   URL da imagem  " type="url" />
           </div>
         </li>
-        <button>Prosseguir pra criar perguntas</button>
+        <button onclick="createQuizz3()">Prosseguir pra criar perguntas</button>
+      </section>`
+}
+
+function createQuizz3(){
+    container[0].innerHTML = "";
+
+    container[0].innerHTML += `
+    <section class="infoQuizz">
+        <h3>Agora decida o nível</h3>
+        <li class="infoAnswers">
+          <div>
+            <h3 class="aside-text">Nível 1</h3>
+            <input placeholder="   Título do nível  " type="text" />
+            <input placeholder="   % de acerto mínima  " type="url" />
+            <input placeholder="   URL da imagem nível  " type="url" />
+            <input placeholder="   Descrição do nível  " type="url" />
+          </div>
+          <div>
+            <h3 class="aside-text">Nível 2</h3>
+            <input placeholder="   Título do nível  " type="text" />
+            <input placeholder="   % de acerto mínima  " type="url" />
+            <input placeholder="   URL da imagem nível  " type="url" />
+            <input placeholder="   Descrição do nível  " type="url" />
+          </div>
+          <div>
+            <h3 class="aside-text">Nível 3</h3>
+            <input placeholder="   Título do nível  " type="text" />
+            <input placeholder="   % de acerto mínima  " type="url" />
+            <input placeholder="   URL da imagem nível  " type="url" />
+            <input placeholder="   Descrição do nível  " type="url" />
+          </div>
+          
+        </li>
       </section>`
 }
 
