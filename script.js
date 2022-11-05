@@ -7,6 +7,7 @@ let container = document.getElementsByClassName("main-content")
 let myQuizzes = document.getElementsByClassName("myQuizzes")
 let allQuizzes = document.getElementsByClassName("quizzes")
 let insideQuizz = document.getElementsByClassName("insideQuizz")
+let globalResponse;
 
 
 //Quizzes salvos no PC do usuário
@@ -233,7 +234,7 @@ function createQuizz4() {
     </section>`
 }
 
-let globalResponse;
+//Função que inicia o quizz
 function initiateQuizz(id) {
     container[0].innerHTML = "";
 
@@ -261,8 +262,10 @@ function initiateQuizz(id) {
               <div class="opcoes"></div>
             </div>`
 
+            //Chamando a função aleatoriedade das alternativas
             let aleatorio = sortArray(response.data.questions[i].answers);
             console.log(aleatorio)
+
             for (let j = 0; j < response.data.questions[i].answers.length; j++) {
                 insideOpcoes[i].innerHTML += `
                   <div onclick="selectOption(this)" class="opcao${j}" data-answers="${aleatorio[j].isCorrectAnswer}">
@@ -276,6 +279,7 @@ function initiateQuizz(id) {
     })
 }
 
+//Função que faz a aleatoriedade
 function sortArray(array){
     let newArray = [];
     for(let i = 0; i < array.length; i++){
@@ -286,19 +290,31 @@ function sortArray(array){
     return newArray.sort(() => Math.random()- 0.5);
 }
 
+
+//Função que trata as alternativas
+//Tornar invisível as perguntas ainda não alcançadas
 let optionVisible = 1;
+
+//Contabilizar os acertos
 let respostaCorreta = 0;
+
 function selectOption(option) {
+  //Armazena todas as opções disponíveis em uma pergunta
     let armazenarOpcoes = document.getElementById(`pergunta${optionVisible - 1}`).querySelectorAll("[data-answers]")
+
     console.log(armazenarOpcoes)
     console.log(option.classList)
     for (let k = 0; k < armazenarOpcoes.length; k++) {
+      //Torna branco tudo que é diferente do que foi clicado
         if (armazenarOpcoes[k].classList[0] != option.classList[0]) {
             armazenarOpcoes[k].classList.toggle("backgroundWhite")
+            console.log(armazenarOpcoes)
         }
+        //Se ao clicar em uma opção acertar 
         if (armazenarOpcoes[k].getAttribute("data-answers") == "true") {
             armazenarOpcoes[k].getElementsByTagName("p")[0].classList.toggle("text-acertou")
         }
+        // Se ao clicar em uma opção errar
         else {
             armazenarOpcoes[k].getElementsByTagName("p")[0].classList.toggle("text-errou")
         }
@@ -308,13 +324,15 @@ function selectOption(option) {
     if (optionType == "true") {
         respostaCorreta++
     }
+
+    //Tornando visível as próximas perguntas
     let optionQtd = globalResponse.data.questions.length;
     if (optionVisible < optionQtd) {
         document.getElementById(`pergunta${optionVisible}`).style.display = "block";
         optionVisible++
     }
 
-
+      //Contabilizando acertos
     else if (optionVisible == optionQtd) {
         let porcentagemAcertos = (respostaCorreta / globalResponse.data.questions.length) * 100;
         console.log(porcentagemAcertos)
@@ -327,6 +345,8 @@ function selectOption(option) {
 
 
         }
+
+        //Tela de finalização do quizz
         insideQuizz[0].innerHTML += `
         <div class="resultado-perguntas">
         <div class="titulo-resposta">
