@@ -476,3 +476,32 @@ header h1 {
 .escondido{
   display: none;
 }
+
+#pergunta1{
+  display: none;
+}
+#pergunta2{
+  display: none;
+}
+#pergunta3{
+  display: none;
+}
+#pergunta4{
+  display: none;
+}
+
+#pergunta5{
+  display: none;
+}
+
+.backgroundWhite{
+  opacity: 30%;
+}
+
+.text-acertou{
+  color: green;
+}
+
+.text-errou{
+  color: red;
+}
