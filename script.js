@@ -51,7 +51,7 @@ function renderAllQuizzes() {
         <div onclick="initiateQuizz(${response.data[i].id})" class="quizz">
           <img src="${response.data[i].image}"  class="screen1Img" alt="imagem-quizz">
           <div class="texto-imagem">
-                ${response.data[i].title}
+                <h1>${response.data[i].title}</h1>
           </div>
         </div>`
     }
@@ -114,7 +114,7 @@ function createQuizz2() {
           </div>
         </li>
 
-        <li class="infoAnswers">
+        <li class="infoAnswers" onclick="closePergunta()">
           <div>
             <h3 class="aside-text">Pergunta 2</h3>
             <input placeholder="   Texto da pergunta  " type="text" />
@@ -187,6 +187,8 @@ function createQuizz3() {
             <input placeholder="   URL da imagem nível  " type="url" />
             <input placeholder="   Descrição do nível  " type="url" />
           </div>
+        </li>
+        <li class="infoAnswers">
           <div>
             <h3 class="aside-text">Nível 2</h3>
             <input placeholder="   Título do nível  " type="text" />
@@ -194,6 +196,8 @@ function createQuizz3() {
             <input placeholder="   URL da imagem nível  " type="url" />
             <input placeholder="   Descrição do nível  " type="url" />
           </div>
+        </li>
+        <li class="infoAnswers">
           <div>
             <h3 class="aside-text">Nível 3</h3>
             <input placeholder="   Título do nível  " type="text" />
@@ -201,7 +205,6 @@ function createQuizz3() {
             <input placeholder="   URL da imagem nível  " type="url" />
             <input placeholder="   Descrição do nível  " type="url" />
           </div>
-          
         </li>
         <button onclick="createQuizz4()">Finalizar Quizz</button>
       </section>`
@@ -210,18 +213,23 @@ function createQuizz3() {
 //Página de criação de quizz 4
 function createQuizz4() {
   container[0].innerHTML = "";
+  container[0].style.paddingTop = "0px";
+  console.log(container)
 
   container[0].innerHTML += `
   <section class="infoQuizz"> 
-    <h3> Seu Quizz está pronto!!! </h3>
-      <li class="infoAnswers">
-        <div>
+    <h3 class="quizzReady"> Seu Quizz está pronto! </h3>
+        <div class ="quizzReadyImg">
           <img src="img/Rectangle.png" alt="">
+          <h1 class="quizzReadyTitle">Titulo</h1>
         </div>
-      </li>
           <button> Acessar o Quizz </button>
           <div class="spacing1"></div> 
-          <button onclick="reload()"> Voltar para o home </button>
+          <div class="voltar-home" onclick="reload()">
+            <h1 class="backHome">
+              Voltar pra home
+            </h1>
+          </div>
     </section>`
 }
 
@@ -229,112 +237,35 @@ function initiateQuizz(id){
   container[0].innerHTML = "";
 
   
-  
+
+
+  let insidePerguntas = document.getElementsByClassName("perguntas")
+  let insideOpcoes = document.getElementsByClassName("opcoes")
 
   axios.get(`${urlAPI}quizzes/${id}`).then(response => {
-    console.log(response)
-    console.log(id)
         insideQuizz[0].innerHTML = `
           <div class="foto-titulo">
                 <img src="${response.data.image}"/>
                 <h1 class="titulo-tela">${response.data.title}</h1>
           </div>`
-          
-          insideQuizz[0].innerHTML += `
-            <div class="perguntas">`
+        console.log(response)
           for(let i = 0; i < response.data.questions.length; i++) {
             insideQuizz[0].innerHTML += `
+            <div class="perguntas">
               <div class="titulo-pergunta id${i}">
                   <p>${response.data.questions[i].title}</p>
-              </div>`
-
-              insideQuizz[0].innerHTML +=`
-              <div class="opcoes">`
+              </div>
+              <div class="opcoes"></div>
+            </div>`
 
           for(let j = 0; j < response.data.questions[i].answers.length; j++){
-            insideQuizz[0].innerHTML +=`
+            insideOpcoes[i].innerHTML +=`
                   <div class="opcao${j}">
                       <img src="${response.data.questions[i].answers[j].image}"/>
-                      <p class="opcao-respostas">Gatíneo</p>
+                      <p class="opcao-respostas">${response.data.questions[i].answers[j].text}</p>
                   </div>`
           }
-              
-        // </div>`
           } 
-
-            
-
-            // <div class="perguntas">
-            //     <div class="titulo-pergunta id2">
-            //         <p>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
-            //     </div>
-            //     <div class="opcoes">
-            //         <div class="opcao1">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao2">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao3">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao4">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //     </div>
-            // </div>
-
-            // <div class="perguntas">
-            //     <div class="titulo-pergunta id1">
-            //         <p>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
-            //     </div>
-            //     <div class="opcoes">
-            //         <div class="opcao1">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao2">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao3">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao4">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //     </div>
-            // </div>
-
-            // <div class="perguntas">
-            //     <div class="titulo-pergunta id2">
-            //         <p>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
-            //     </div>
-            //     <div class="opcoes">
-            //         <div class="opcao1">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao2">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao3">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //         <div class="opcao4">
-            //             <img src="./imagens/image 3.png"/>
-            //             <p class="opcao-respostas">Gatíneo</p>
-            //         </div>
-            //     </div>
-            // </div>
 
             // <div class="resultado-perguntas">
             //     <div class="titulo-resposta">
@@ -350,6 +281,11 @@ function initiateQuizz(id){
             // <p class="voltar-home">Voltar pra home</p>`
     
   })
+}
+
+function closePergunta() {
+  let hideQuestion = document.querySelector(".infoAnswers")
+  hideQuestion.classList.toggle("escondido")
 }
 
 //Função para retornar para a homepage
