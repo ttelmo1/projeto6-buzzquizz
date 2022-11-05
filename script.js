@@ -21,7 +21,7 @@ function renderMyQuizzes() {
     axios.get(`${urlAPI}quizzes`).then(response => {
         if (!myQuizzesSaved) {
             myQuizzes[0].innerHTML += `
-      <div class="empty-user-quizzes">
+      <div class="empty-user-quizzes cursor">
             <span>Você não criou nenhum<br />quizz ainda :(</span>
           <button onclick="createQuizz1()">
               Criar Quizz
@@ -49,7 +49,7 @@ function renderAllQuizzes() {
     axios.get(`${urlAPI}quizzes`).then(response => {
         for (let i = 0; i < response.data.length; i++) {
             allQuizzes[1].innerHTML += `
-        <div onclick="initiateQuizz(${response.data[i].id})" class="quizz">
+        <div onclick="initiateQuizz(${response.data[i].id})" class="quizz cursor">
           <img src="${response.data[i].image}"  class="screen1Img" alt="imagem-quizz">
           <div class="texto-imagem">
                 <h1>${response.data[i].title}</h1>
@@ -66,7 +66,7 @@ function createQuizz1() {
 
     container[0].innerHTML += `
     <section class="infoQuizz"> 
-        <h3> Comece pelo começo </h3>
+        <h3 class="cursor"> Comece pelo começo </h3>
             <li class="infoAnswers">
                 <div>
                     <input placeholder="   Título do seu quizz  " type="text">
@@ -75,7 +75,7 @@ function createQuizz1() {
                     <input placeholder="   Quantidade de níveis do quiz  " type="numeric">
                 </div>
             </li>
-        <button onclick="createQuizz2()"> Prosseguir pra criar perguntas </button>
+        <button class="cursor" onclick="createQuizz2()"> Prosseguir pra criar perguntas </button>
     </section>`
 
 }
@@ -86,20 +86,20 @@ function createQuizz2() {
 
     container[0].innerHTML += `
     <section class="infoQuizz">
-        <h3>Crie suas perguntas</h3>
+        <h3 class="cursor">Crie suas perguntas</h3>
         <li class="infoAnswers">
           <div>
-            <h3 class="aside-text">Pergunta 1</h3>
+            <h3 class="aside-text cursor">Pergunta 1</h3>
             <input placeholder="   Texto da pergunta  " type="text" />
             <input placeholder="   Cor de fundo da pergunta  " type="url" />
           </div>
           <div>
-            <h3 class="aside-text">Resposta Correta</h3>
+            <h3 class="aside-text cursor">Resposta Correta</h3>
             <input placeholder="   Resposta Correta  " type="text" />
             <input placeholder="   URL da imagem  " type="url" />
           </div>
           <div>
-            <h3 class="aside-text">Resposta Incorreta</h3>
+            <h3 class="aside-text cursor">Resposta Incorreta</h3>
             <input placeholder="   Resposta Incorreta  " type="text" />
             <input placeholder="   URL da imagem  " type="url" />
           </div>
@@ -117,17 +117,17 @@ function createQuizz2() {
 
         <li class="infoAnswers" onclick="closePergunta()">
           <div>
-            <h3 class="aside-text">Pergunta 2</h3>
+            <h3 class="aside-text cursor">Pergunta 2</h3>
             <input placeholder="   Texto da pergunta  " type="text" />
             <input placeholder="   Cor de fundo da pergunta  " type="url" />
           </div>
           <div>
-            <h3 class="aside-text">Resposta Correta</h3>
+            <h3 class="aside-text cursor">Resposta Correta</h3>
             <input placeholder="   Resposta Correta  " type="text" />
             <input placeholder="   URL da imagem  " type="url" />
           </div>
           <div>
-            <h3 class="aside-text">Resposta Incorreta</h3>
+            <h3 class="aside-text cursor">Resposta Incorreta</h3>
             <input placeholder="   Resposta Incorreta  " type="text" />
             <input placeholder="   URL da imagem  " type="url" />
           </div>
@@ -144,17 +144,17 @@ function createQuizz2() {
         </li>
         <li class="infoAnswers">
           <div>
-            <h3 class="aside-text">Pergunta 3</h3>
+            <h3 class="aside-text cursor">Pergunta 3</h3>
             <input placeholder="   Texto da pergunta  " type="text" />
             <input placeholder="   Cor de fundo da pergunta  " type="url" />
           </div>
           <div>
-            <h3 class="aside-text">Resposta Correta</h3>
+            <h3 class="aside-text cursor">Resposta Correta</h3>
             <input placeholder="   Resposta Correta  " type="text" />
             <input placeholder="   URL da imagem  " type="url" />
           </div>
           <div>
-            <h3 class="aside-text">Resposta Incorreta</h3>
+            <h3 class="aside-text cursor">Resposta Incorreta</h3>
             <input placeholder="   Resposta Incorreta  " type="text" />
             <input placeholder="   URL da imagem  " type="url" />
           </div>
@@ -169,7 +169,7 @@ function createQuizz2() {
             <input placeholder="   URL da imagem  " type="url" />
           </div>
         </li>
-        <button onclick="createQuizz3()">Prosseguir pra criar níveis</button>
+        <button class="cursor" onclick="createQuizz3()">Prosseguir pra criar níveis</button>
       </section>`
 }
 
@@ -179,10 +179,10 @@ function createQuizz3() {
 
     container[0].innerHTML += `
     <section class="infoQuizz">
-        <h3>Agora decida o nível</h3>
+        <h3 class="cursor">Agora decida o nível</h3>
         <li class="infoAnswers">
           <div>
-            <h3 class="aside-text">Nível 1</h3>
+            <h3 class="aside-text cursor">Nível 1</h3>
             <input placeholder="   Título do nível  " type="text" />
             <input placeholder="   % de acerto mínima  " type="url" />
             <input placeholder="   URL da imagem nível  " type="url" />
@@ -191,7 +191,7 @@ function createQuizz3() {
         </li>
         <li class="infoAnswers">
           <div>
-            <h3 class="aside-text">Nível 2</h3>
+            <h3 class="aside-text cursor">Nível 2</h3>
             <input placeholder="   Título do nível  " type="text" />
             <input placeholder="   % de acerto mínima  " type="url" />
             <input placeholder="   URL da imagem nível  " type="url" />
@@ -200,14 +200,14 @@ function createQuizz3() {
         </li>
         <li class="infoAnswers">
           <div>
-            <h3 class="aside-text">Nível 3</h3>
+            <h3 class="aside-text cursor">Nível 3</h3>
             <input placeholder="   Título do nível  " type="text" />
             <input placeholder="   % de acerto mínima  " type="url" />
             <input placeholder="   URL da imagem nível  " type="url" />
             <input placeholder="   Descrição do nível  " type="url" />
           </div>
         </li>
-        <button onclick="createQuizz4()">Finalizar Quizz</button>
+        <button class="cursor" onclick="createQuizz4()">Finalizar Quizz</button>
       </section>`
 }
 
@@ -219,15 +219,15 @@ function createQuizz4() {
 
     container[0].innerHTML += `
   <section class="infoQuizz"> 
-    <h3 class="quizzReady"> Seu Quizz está pronto! </h3>
-        <div class ="quizzReadyImg">
+    <h3 class="quizzReady cursor"> Seu Quizz está pronto! </h3>
+        <div class ="quizzReadyImg cursor">
           <img src="img/Rectangle.png" alt="">
           <h1 class="quizzReadyTitle">Titulo</h1>
         </div>
-          <button> Acessar o Quizz </button>
+          <button class="cursor"> Acessar o Quizz </button>
           <div class="spacing1"></div> 
           <div class="voltar-home" onclick="reload()">
-            <h1 class="backHome">
+            <h1 class="backHome cursor">
               Voltar pra home
             </h1>
           </div>
@@ -248,14 +248,14 @@ function initiateQuizz(id) {
         globalResponse = response
         console.log(globalResponse)
         insideQuizz[0].innerHTML = `
-          <div class="foto-titulo">
+          <div class="foto-titulo cursor">
                 <img src="${response.data.image}"/>
                 <h1 class="titulo-tela">${response.data.title}</h1>
           </div>`
         console.log(response)
         for (let i = 0; i < response.data.questions.length; i++) {
             insideQuizz[0].innerHTML += `
-            <div class="perguntas" id="pergunta${i}">
+            <div class="perguntas cursor" id="pergunta${i}">
               <div class="titulo-pergunta id${i}">
                   <p>${response.data.questions[i].title}</p>
               </div>
@@ -268,9 +268,9 @@ function initiateQuizz(id) {
 
             for (let j = 0; j < response.data.questions[i].answers.length; j++) {
                 insideOpcoes[i].innerHTML += `
-                  <div onclick="selectOption(this)" class="opcao${j}" data-answers="${aleatorio[j].isCorrectAnswer}">
+                  <div onclick="selectOption(this)" class="opcao${j} cursor" data-answers="${aleatorio[j].isCorrectAnswer}">
                       <img src="${aleatorio[j].image}"/>
-                      <p class="opcao-respostas">${aleatorio[j].text}</p>
+                      <p class="opcao-respostas cursor">${aleatorio[j].text}</p>
                   </div>`
             }
         }
@@ -349,17 +349,17 @@ function selectOption(option) {
         //Tela de finalização do quizz
         insideQuizz[0].innerHTML += `
         <div class="resultado-perguntas">
-        <div class="titulo-resposta">
+        <div class="titulo-resposta cursor">
             <p>${porcentagemAcertos.toFixed(0)}% de acerto: ${globalResponse.data.levels[maior].title}</p>
         </div>
-        <div class="resposta-final">
+        <div class="resposta-final cursor">
             <img src="${globalResponse.data.levels[maior].image}"/>
             <p>${globalResponse.data.levels[maior].text}</p>
         </div>
     </div>
 
-    <button class="reiniciar-quizz">Reiniciar Quizz</button>
-    <p class="voltar-home" onclick="reload()">Voltar pra home</p>`
+    <button onclick="reiniciarQuizz()"class="reiniciar-quizz cursor">Reiniciar Quizz</button>
+    <p class="voltar-home cursor" onclick="reload()">Voltar pra home</p>`
 
     }
 
@@ -383,3 +383,8 @@ window.onload = function () {
     renderMyQuizzes()
     renderAllQuizzes()
 }
+
+function reiniciarQuizz() {
+
+}
+

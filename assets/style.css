@@ -505,3 +505,7 @@ header h1 {
 .text-errou{
   color: red;
 }
+
+.cursor {
+  cursor: pointer;
+}
