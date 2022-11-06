@@ -49,8 +49,7 @@ function renderAllQuizzes() {
     axios.get(`${urlAPI}quizzes`).then(response => {
         for (let i = 0; i < response.data.length; i++) {
             allQuizzes[1].innerHTML += `
-        <div onclick="initiateQuizz(${response.data[i].id})" class="quizz cursor">
-          <img src="${response.data[i].image}"  class="screen1Img" alt="imagem-quizz">
+        <div onclick="initiateQuizz(${response.data[i].id})" class="quizz cursor" style="background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(${response.data[i].image});">
           <div class="texto-imagem">
                 <h1>${response.data[i].title}</h1>
           </div>
