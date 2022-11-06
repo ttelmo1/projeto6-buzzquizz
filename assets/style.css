@@ -249,7 +249,8 @@ header h1 {
   justify-content: center;
   align-items: center;
   background-color: #ffff;
-  height: 70px;
+  height: auto;
+  padding: 21px 16px 20px 16px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   border-radius: 2px;
   margin: 26px 0 80px 0;
@@ -514,20 +515,6 @@ header h1 {
 
 ion-icon {
   margin-left: 380px;
-  margin-bottom: 35px;
-  margin-right: 35px;
+  margin-bottom: 0;
   font-size: 30px;
-}
-
-.cabecalho {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 35px;
-}
-
-.aside-text {
-  width: 200px;
-  margin-bottom: 35px;
-  margin-left: 35px;
 }
