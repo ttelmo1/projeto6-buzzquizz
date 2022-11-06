@@ -524,7 +524,8 @@ ion-icon {
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 35px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .cabecalho h3 {
