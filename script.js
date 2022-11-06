@@ -8,6 +8,9 @@ let myQuizzes = document.getElementsByClassName("myQuizzes")
 let allQuizzes = document.getElementsByClassName("quizzes")
 let insideQuizz = document.getElementsByClassName("insideQuizz")
 let globalResponse;
+let userQuizz = {};
+let qtdPerguntas;
+let qtdNiveis;
 
 
 //Quizzes salvos no PC do usuário
@@ -68,10 +71,10 @@ function createQuizz1() {
         <h3 class="cursor"> Comece pelo começo </h3>
             <li class="infoAnswers">
                 <div>
-                    <input placeholder="   Título do seu quizz  " type="text">
-                    <input placeholder="   URL da imagem do seu quizz  " type="url">
-                    <input placeholder="   Quantidade de perguntas do quizz   " type="numeric">
-                    <input placeholder="   Quantidade de níveis do quiz  " type="numeric">
+                    <input class="inputTitle" placeholder="   Título do seu quizz  " type="text">
+                    <input class="inputImage" placeholder="   URL da imagem do seu quizz  " type="url">
+                    <input class="inputQuestions" placeholder="   Quantidade de perguntas do quizz   " type="numeric">
+                    <input class="inputLevels" placeholder="   Quantidade de níveis do quiz  " type="numeric">
                 </div>
             </li>
         <button class="cursor" onclick="createQuizz2()"> Prosseguir pra criar perguntas </button>
@@ -81,8 +84,51 @@ function createQuizz1() {
 
 //Página de criação de quizz 2
 function createQuizz2() {
+  let title = document.querySelector(".inputTitle").value
+  let image = document.querySelector(".inputImage").value
+  qtdPerguntas = document.querySelector(".inputQuestions").value
+  qtdNiveis = document.querySelector(".inputLevels").value
+
+
+
+  if(title.length >= 20 && title.length <= 65 ){
+
+    userQuizz.title = title;
+
+  }
+  else{
+    alert("O Título deve conter entre 20 e 65 caracteres")
+    return
+  }
+
+  let regexUrl = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
+
+  if( regexUrl.test(image)){
+    userQuizz.image = image;
+    
+  }
+  else{
+    alert("Insira uma URL válida")
+    return
+  }
+
+  if(qtdPerguntas < 3){
+    alert("No mínimo 3 perguntas")
+    return
+  }
+
+  if(qtdNiveis < 2){
+    alert("No mínimo 2 níveis")
+    return
+  }
+  
+  console.log(userQuizz)
+
+
+
     container[0].innerHTML = "";
 
+    
     container[0].innerHTML += `
     <section class="infoQuizz">
         <h3 class="cursor">Crie suas perguntas</h3>
