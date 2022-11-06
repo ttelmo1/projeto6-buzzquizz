@@ -214,7 +214,6 @@ function createQuizz3() {
 function createQuizz4() {
     container[0].innerHTML = "";
     container[0].style.paddingTop = "0px";
-    console.log(container)
 
     container[0].innerHTML += `
   <section class="infoQuizz"> 
@@ -251,7 +250,7 @@ function initiateQuizz(id) {
                 <img src="${response.data.image}"/>
                 <h1 class="titulo-tela">${response.data.title}</h1>
           </div>`
-        console.log(response)
+
         for (let i = 0; i < response.data.questions.length; i++) {
             insideQuizz[0].innerHTML += `
             <div class="perguntas cursor" id="pergunta${i}">
@@ -263,7 +262,7 @@ function initiateQuizz(id) {
 
             //Chamando a função aleatoriedade das alternativas
             let aleatorio = sortArray(response.data.questions[i].answers);
-            console.log(aleatorio)
+
 
             for (let j = 0; j < response.data.questions[i].answers.length; j++) {
                 insideOpcoes[i].innerHTML += `
@@ -301,13 +300,13 @@ function selectOption(option) {
   //Armazena todas as opções disponíveis em uma pergunta
     let armazenarOpcoes = document.getElementById(`pergunta${optionVisible - 1}`).querySelectorAll("[data-answers]")
 
-    console.log(armazenarOpcoes)
-    console.log(option.classList)
+    
+
     for (let k = 0; k < armazenarOpcoes.length; k++) {
       //Torna branco tudo que é diferente do que foi clicado
         if (armazenarOpcoes[k].classList[0] != option.classList[0]) {
             armazenarOpcoes[k].classList.toggle("backgroundWhite")
-            console.log(armazenarOpcoes)
+
         }
         //Se ao clicar em uma opção acertar 
         if (armazenarOpcoes[k].getAttribute("data-answers") == "true") {
@@ -328,14 +327,15 @@ function selectOption(option) {
     let optionQtd = globalResponse.data.questions.length;
     if (optionVisible < optionQtd) {
         document.getElementById(`pergunta${optionVisible}`).style.display = "block";
+        let proximaPergunta = document.getElementById(`pergunta${optionVisible-1}`).nextElementSibling;
+        
+        proximaPergunta.scrollIntoView();
         optionVisible++
     }
 
       //Contabilizando acertos
     else if (optionVisible == optionQtd) {
         let porcentagemAcertos = (respostaCorreta / globalResponse.data.questions.length) * 100;
-        console.log(porcentagemAcertos)
-        console.log(respostaCorreta)
         let maior = 0;
         for (let p = 0; p < globalResponse.data.levels.length; p++) {
             if (porcentagemAcertos >= globalResponse.data.levels[p].minValue) {
@@ -357,9 +357,9 @@ function selectOption(option) {
         </div>
     </div>
 
-    <button onclick="reiniciarQuizz()"class="reiniciar-quizz cursor">Reiniciar Quizz</button>
+    <button onclick="reiniciarQuizz(${globalResponse.data.id})"class="reiniciar-quizz cursor">Reiniciar Quizz</button>
     <p class="voltar-home cursor" onclick="reload()">Voltar pra home</p>`
-
+        optionVisible = 1
     }
 
 
@@ -383,7 +383,7 @@ window.onload = function () {
     renderAllQuizzes()
 }
 
-function reiniciarQuizz() {
-
+function reiniciarQuizz(id) {
+  initiateQuizz(id)
 }
 
