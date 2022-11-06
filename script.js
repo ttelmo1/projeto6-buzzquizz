@@ -203,7 +203,7 @@ function createQuizz3() {
 
       objetoPergunta.title = tituloPergunta;
       
-      const regexCor = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+      const regexCor = /^#([A-Fa-f0-9]{6})$/
       if(!regexCor.test(corPergunta)){
         alert("Inserir uma cor em hexadecimal");
         return
