@@ -13,7 +13,7 @@ let qtdPerguntas;
 let qtdNiveis;
 let perguntas = [];
 let levels = [];
-let regexUrl = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
+let regexUrl = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
 
 
 
@@ -215,86 +215,137 @@ function createQuizz3() {
         let objetoResposta = {};
         let textoResposta = respostas[j].querySelector(".textoResposta").value;
         let urlResposta = respostas[j].querySelector(".urlResposta").value;
-        if(respostas[j].classList.contains("correto") || respostas[j].classList.contains("primeira") ){
+        if(respostas[j].classList.contains("correta") || respostas[j].classList.contains("primeira") ){
           if(textoResposta === ""){
             alert("Preencher no mínimo 2 respostas")
             return
           }
           objetoResposta.text = textoResposta;
-
-          if(!regexUrl.test(urlResposta)){
+          console.log(respostas[j])
+          if(regexUrl.test(urlResposta)){
+            objetoResposta.image = urlResposta
+          } else {
             alert("Inserir um URL válido")
             return
           }
-          objetoResposta.image = urlResposta
+          objetoResposta.isCorrectAnswer = respostas[j].classList.contains("correta");
+          objetoPergunta.answers.push(objetoResposta)
+        } else {
+          if (textoResposta !== ""){
+            objetoResposta.text = textoResposta
+            if(regexUrl.test(urlResposta)){
+              objetoResposta.image = urlResposta
+            } else {
+              alert("Inserir um URL válido")
+              return
+            }
+            objetoResposta.isCorrectAnswer = false;
+            objetoPergunta.answers.push(objetoResposta)
+          }
         }
-     
-        objetoResposta.isCorrectAnswer = respostas[j].classList.contains("correto");
-        objetoPergunta.answers.push(objetoResposta)
+        
+
       }
 
       questions.push(objetoPergunta)
-      console.log(questions)
+      
     }
+      userQuizz.questions = questions
     
 
     container[0].innerHTML = "";
 
+    let niveis = []
 
+    for (let i = 0; i < qtdNiveis; i++){
+      const nivelHTML = `
+      <li class="infoAnswers">
+      <div>
+        <h3 class="aside-text cursor">Nível ${i+1}</h3>
+        <input class="tituloNivel" placeholder="   Título do nível  " type="text" />
+        <input class="porcentMinimo" placeholder="   % de acerto mínima  " type="url" />
+        <input class="imagemNivel" placeholder="   URL da imagem nível  " type="url" />
+        <input class="descricaoNivel" placeholder="   Descrição do nível  " type="url" />
+      </div>
+      </li>
+      `
+      niveis.push(nivelHTML)
+    }
     container[0].innerHTML += `
     <section class="infoQuizz">
-        <h3 class="cursor">Agora decida o nível</h3>
-        <li class="infoAnswers">
-          <div>
-            <h3 class="aside-text cursor">Nível 1</h3>
-            <input placeholder="   Título do nível  " type="text" />
-            <input placeholder="   % de acerto mínima  " type="url" />
-            <input placeholder="   URL da imagem nível  " type="url" />
-            <input placeholder="   Descrição do nível  " type="url" />
-          </div>
-        </li>
-        <li class="infoAnswers">
-          <div>
-            <h3 class="aside-text cursor">Nível 2</h3>
-            <input placeholder="   Título do nível  " type="text" />
-            <input placeholder="   % de acerto mínima  " type="url" />
-            <input placeholder="   URL da imagem nível  " type="url" />
-            <input placeholder="   Descrição do nível  " type="url" />
-          </div>
-        </li>
-        <li class="infoAnswers">
-          <div>
-            <h3 class="aside-text cursor">Nível 3</h3>
-            <input placeholder="   Título do nível  " type="text" />
-            <input placeholder="   % de acerto mínima  " type="url" />
-            <input placeholder="   URL da imagem nível  " type="url" />
-            <input placeholder="   Descrição do nível  " type="url" />
-          </div>
-        </li>
-        <button class="cursor" onclick="createQuizz4()">Finalizar Quizz</button>
-      </section>`
+    <h3 class="cursor">Agora decida o nível</h3>
+    ${niveis.join(" ")}
+    <button class="cursor" onclick="createQuizz4()">Finalizar Quizz</button>
+    </section>
+    `
 }
 
 //Página de criação de quizz 4
 function createQuizz4() {
-    container[0].innerHTML = "";
-    container[0].style.paddingTop = "0px";
+    let arrDeNiveis = document.querySelectorAll("li.infoAnswers")
+    let existePeloMenosUmPercentual0 = false
+    let levels = []
+    for (let i = 0; i < arrDeNiveis.length; i++){
+      const objetoNivel = {}
+      const titulo = arrDeNiveis[i].querySelector(".tituloNivel").value
+      const porcentagem = arrDeNiveis[i].querySelector(".porcentMinimo").value
+      const imagem = arrDeNiveis[i].querySelector(".imagemNivel").value
+      const descricao = arrDeNiveis[i].querySelector(".descricaoNivel").value
+    if ( titulo.length < 10){
+      alert("Titulo deve ter no minimo 10 caracteres")
+      return
+    } 
+    objetoNivel.title = titulo
+    if ( porcentagem < 0 || porcentagem > 100){
+      alert("Porcentagem devera ser entre 0 e 100")
+      return
+    }
+    objetoNivel.minValue = Number(porcentagem)
+    if ( objetoNivel.minValue === 0) existePeloMenosUmPercentual0 = true
+    if ( !regexUrl.test(imagem) ){
+      alert("Insira um url válido")
+      return
+    }
+    objetoNivel.image = imagem
+    if ( descricao.length < 30){
+      alert("Descrição deve ter no minimo 30 caracteres")
+    }
+    objetoNivel.text = descricao
+    levels.push(objetoNivel)
+  } 
+    if (!existePeloMenosUmPercentual0 ){
+      alert("Deve pelo menos existir um percentual 0")
+      levels = []
+      return
+    }
+    userQuizz.levels = levels
+    console.log(userQuizz)
 
-    container[0].innerHTML += `
+    const promessa = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", userQuizz)
+    promessa.then(sucessoCriacao)
+  }
+
+function sucessoCriacao(res) {
+  const resposta = res.data
+
+  container[0].innerHTML = "";
+  container[0].style.paddingTop = "0px";
+
+  container[0].innerHTML += `
   <section class="infoQuizz"> 
-    <h3 class="quizzReady cursor"> Seu Quizz está pronto! </h3>
-        <div class ="quizzReadyImg cursor">
-          <img src="img/Rectangle.png" alt="">
-          <h1 class="quizzReadyTitle">Titulo</h1>
-        </div>
-          <button class="cursor"> Acessar o Quizz </button>
-          <div class="spacing1"></div> 
-          <div class="voltar-home" onclick="reload()">
-            <h1 class="backHome cursor">
-              Voltar pra home
-            </h1>
-          </div>
-    </section>`
+     <h3 class="quizzReady cursor"> Seu Quizz está pronto! </h3>
+        <div class ="quizzReadyImg cursor" style="background-image="linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(${resposta.image});" ">
+          <h1 class="quizzReadyTitle">${resposta.title}</h1>
+         </div>
+           <button class="cursor" onclick="initiateQuizz(${resposta.id})"> Acessar o Quizz </button>
+           <div class="spacing1"></div> 
+           <div class="voltar-home" onclick="reload()">
+             <h1 class="backHome cursor">
+               Voltar pra home
+             </h1>
+           </div>
+  </section>`
+
 }
 
 //Função que inicia o quizz
