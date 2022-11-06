@@ -518,3 +518,15 @@ ion-icon {
   margin-bottom: 0;
   font-size: 30px;
 }
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 35px;
+}
+
+.cabecalho h3 {
+  width: 200px;
+}
