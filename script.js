@@ -11,6 +11,10 @@ let globalResponse;
 let userQuizz = {};
 let qtdPerguntas;
 let qtdNiveis;
+let perguntas = [];
+let levels = [];
+let regexUrl = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
+
 
 
 //Quizzes salvos no PC do usuário
@@ -101,7 +105,7 @@ function createQuizz2() {
     return
   }
 
-  let regexUrl = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
+  
 
   if( regexUrl.test(image)){
     userQuizz.image = image;
@@ -124,103 +128,118 @@ function createQuizz2() {
   
   console.log(userQuizz)
 
+let creationPage2 = [];
+
+for(let f = 0; f < qtdPerguntas; f++){
+  let htmlPergunta =`
+  <li class="infoAnswers">
+  <div class="cabecalho">
+  <h3 class="aside-text cursor">Pergunta ${f+1}</h3>
+  <ion-icon name="create-outline" onclick="closePergunta(this)"></ion-icon>
+  </div>
+    <div class="container-input escondido">
+    <div>
+      <input class="tituloPergunta" placeholder="   Texto da pergunta  " type="text" />
+      <input class="corPergunta" placeholder="   Cor de fundo da pergunta  " type="text" />
+    </div>
+    <div class="resposta correta">
+      <h3 class="aside-text cursor">Resposta Correta</h3>
+      <input class="textoResposta" placeholder="   Resposta Correta  " type="text" />
+      <input class="urlResposta" placeholder="   URL da imagem  " type="url" />
+    </div>
+    <div class="resposta incorreta primeira">
+      <h3 class="aside-text cursor">Resposta Incorreta</h3>
+      <input class="textoResposta" placeholder="   Resposta Incorreta  " type="text" />
+      <input class="urlResposta"placeholder="   URL da imagem  " type="url" />
+    </div>
+    <div class="spacing1"></div>
+    <div class="resposta incorreta">
+      <input class="textoResposta" placeholder="   Resposta Incorreta  " type="text" />
+      <input class="urlResposta" placeholder="   URL da imagem  " type="url" />
+    </div>
+    <div class="spacing1"></div>
+    <div class="resposta incorreta">
+      <input class="textoResposta" placeholder="   Resposta Incorreta  " type="text" />
+      <input class="urlResposta" placeholder="   URL da imagem  " type="url" />
+    </div>
+  </li>
+  `
+
+  
+  creationPage2.push(htmlPergunta)
+}
+
 
 
     container[0].innerHTML = "";
 
-    
-    container[0].innerHTML += `
-    <section class="infoQuizz">
-        <h3 class="cursor">Crie suas perguntas</h3>
-        <li class="infoAnswers">
-          <div>
-            <h3 class="aside-text cursor">Pergunta 1</h3>
-            <input placeholder="   Texto da pergunta  " type="text" />
-            <input placeholder="   Cor de fundo da pergunta  " type="url" />
-          </div>
-          <div>
-            <h3 class="aside-text cursor">Resposta Correta</h3>
-            <input placeholder="   Resposta Correta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div>
-            <h3 class="aside-text cursor">Resposta Incorreta</h3>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div class="spacing1"></div>
-          <div>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div class="spacing1"></div>
-          <div>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-        </li>
+    container[0].innerHTML +=`
+      <section class="infoQuizz">
+      ${creationPage2.join(" ")}  
+      <button class="cursor" onclick="createQuizz3()">Prosseguir pra criar níveis</button> 
+      </section>
+    `
 
-        <li class="infoAnswers" onclick="closePergunta()">
-          <div>
-            <h3 class="aside-text cursor">Pergunta 2</h3>
-            <input placeholder="   Texto da pergunta  " type="text" />
-            <input placeholder="   Cor de fundo da pergunta  " type="url" />
-          </div>
-          <div>
-            <h3 class="aside-text cursor">Resposta Correta</h3>
-            <input placeholder="   Resposta Correta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div>
-            <h3 class="aside-text cursor">Resposta Incorreta</h3>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div class="spacing1"></div>
-          <div>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div class="spacing1"></div>
-          <div>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-        </li>
-        <li class="infoAnswers">
-          <div>
-            <h3 class="aside-text cursor">Pergunta 3</h3>
-            <input placeholder="   Texto da pergunta  " type="text" />
-            <input placeholder="   Cor de fundo da pergunta  " type="url" />
-          </div>
-          <div>
-            <h3 class="aside-text cursor">Resposta Correta</h3>
-            <input placeholder="   Resposta Correta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div>
-            <h3 class="aside-text cursor">Resposta Incorreta</h3>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div class="spacing1"></div>
-          <div>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-          <div class="spacing1"></div>
-          <div>
-            <input placeholder="   Resposta Incorreta  " type="text" />
-            <input placeholder="   URL da imagem  " type="url" />
-          </div>
-        </li>
-        <button class="cursor" onclick="createQuizz3()">Prosseguir pra criar níveis</button>
-      </section>`
 }
 
 //Página de criação de quizz 3
 function createQuizz3() {
+
+    let questions = [];
+    let arrayPerguntas = document.querySelectorAll("li.infoAnswers")
+    for(let i = 0; i < arrayPerguntas.length; i++){
+      let objetoPergunta = {};
+      objetoPergunta.answers = [];
+      let tituloPergunta = arrayPerguntas[i].querySelector(".tituloPergunta").value
+      let corPergunta = arrayPerguntas[i].querySelector(".corPergunta").value
+
+      let respostas = arrayPerguntas[i].querySelectorAll(".resposta")
+      
+
+      if(tituloPergunta.length < 20){
+        alert("O título deve ser maior que 20 caracteres")
+        return
+      }
+
+      objetoPergunta.title = tituloPergunta;
+      
+      const regexCor = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+      if(!regexCor.test(corPergunta)){
+        alert("Inserir uma cor em hexadecimal");
+        return
+      }
+      
+
+      objetoPergunta.color = corPergunta;
+      for(let j = 0; j < respostas.length; j++){
+        let objetoResposta = {};
+        let textoResposta = respostas[j].querySelector(".textoResposta").value;
+        let urlResposta = respostas[j].querySelector(".urlResposta").value;
+        if(respostas[j].classList.contains("correto") || respostas[j].classList.contains("primeira") ){
+          if(textoResposta === ""){
+            alert("Preencher no mínimo 2 respostas")
+            return
+          }
+          objetoResposta.text = textoResposta;
+
+          if(!regexUrl.test(urlResposta)){
+            alert("Inserir um URL válido")
+            return
+          }
+          objetoResposta.image = urlResposta
+        }
+     
+        objetoResposta.isCorrectAnswer = respostas[j].classList.contains("correto");
+        objetoPergunta.answers.push(objetoResposta)
+      }
+
+      questions.push(objetoPergunta)
+      console.log(questions)
+    }
+    
+
     container[0].innerHTML = "";
+
 
     container[0].innerHTML += `
     <section class="infoQuizz">
@@ -413,9 +432,9 @@ function selectOption(option) {
 
 
 
-function closePergunta() {
-    let hideQuestion = document.querySelector(".infoAnswers")
-    hideQuestion.classList.toggle("escondido")
+function closePergunta(elemento) {
+  const containerInput = elemento.parentElement.nextElementSibling
+  containerInput.classList.toggle("escondido")
 }
 
 //Função para retornar para a homepage
@@ -432,4 +451,6 @@ window.onload = function () {
 function reiniciarQuizz(id) {
   initiateQuizz(id)
 }
+
+
 

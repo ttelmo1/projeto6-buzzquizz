@@ -512,3 +512,9 @@ header h1 {
 .cursor {
   cursor: pointer;
 }
+
+ion-icon {
+  margin-top: 0px;
+  margin-left: 380px;
+  font-size: 30px;
+}
