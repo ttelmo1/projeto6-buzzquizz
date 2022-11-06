@@ -327,6 +327,18 @@ function createQuizz4() {
 
 function sucessoCriacao(res) {
   const resposta = res.data
+  let idsQuizzesUsuario =[];
+  if (localStorage.getItem("quizzesUsuario")) {
+    idsQuizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"))
+    idsQuizzesUsuario.push(resposta.id)
+    localStorage.setItem("quizzesUsuario", JSON.stringify(idsQuizzesUsuario))
+
+  }
+  else {
+    idsQuizzesUsuario.push(resposta.id)
+    localStorage.setItem("quizzesUsuario", JSON.stringify(idsQuizzesUsuario))
+  }
+
 
   container[0].innerHTML = "";
   container[0].style.paddingTop = "0px";
