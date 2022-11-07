@@ -531,3 +531,22 @@ ion-icon {
 .cabecalho h3 {
   width: 200px;
 }
+
+.userQuizzes {
+  display: flex;
+  align-items: center;
+}
+
+.redPlus {
+  color: #ec362d;
+}
+
+.quizzesUser{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.userQuizzes ion-icon{
+  margin-left: 0px;
+}

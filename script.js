@@ -18,7 +18,7 @@ let regexUrl = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9(
 
 
 //Quizzes salvos no PC do usuário
-let myQuizzesSaved = localStorage.getItem("myQuizId")
+let myQuizzesSaved = JSON.parse(localStorage.getItem("quizzesUsuario"))
 
 //Renderizar quizzes do usuário
 function renderMyQuizzes() {
@@ -33,17 +33,29 @@ function renderMyQuizzes() {
           <button onclick="createQuizz1()">
               Criar Quizz
           </button>
-      </div>
-      <div class="filled-user-quizzes hidden">
-          <div class="title-user-quizzes">
-              <h3>Seus Quizzes</h3>
-              <ion-icon name="add-circle"></ion-icon>
-          </div>
-          <div class="quizzes"></div>
       </div>`;
         }
         else {
-            // usuario com quiz cadastrado
+          myQuizzes[0].innerHTML +=`
+          <div class="userQuizzes">
+            <h3>Seus Quizzes</h3>
+            <ion-icon  onclick="createQuizz1()" class="redPlus cursor" name="add-circle"></ion-icon>
+          </div>
+          <div  class="quizzesUser"></div>`
+
+          let quizzesUser = document.getElementsByClassName("quizzesUser");
+        for(let k = 0; k <= myQuizzesSaved.length; k++){
+          axios.get(`${urlAPI}quizzes/${myQuizzesSaved[k]}`).then(response => {
+            console.log(myQuizzesSaved[k])
+            quizzesUser[0].innerHTML += `
+            <div onclick="initiateQuizz(${response.data.id})" class="quizz cursor" style="background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(${response.data.image});">
+              <div class="texto-imagem">
+                  <h1>${response.data.title}</h1>
+              </div>
+            </div>
+            `
+          })
+        }
         }
     })
 }
@@ -55,7 +67,8 @@ function renderAllQuizzes() {
 
     axios.get(`${urlAPI}quizzes`).then(response => {
         for (let i = 0; i < response.data.length; i++) {
-            allQuizzes[1].innerHTML += `
+            console.log(allQuizzes)
+            allQuizzes[0].innerHTML += `
         <div onclick="initiateQuizz(${response.data[i].id})" class="quizz cursor" style="background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(${response.data[i].image});">
           <div class="texto-imagem">
                 <h1>${response.data[i].title}</h1>
@@ -327,6 +340,7 @@ function createQuizz4() {
 
 function sucessoCriacao(res) {
   const resposta = res.data
+  console.log(resposta)
   let idsQuizzesUsuario =[];
   if (localStorage.getItem("quizzesUsuario")) {
     idsQuizzesUsuario = JSON.parse(localStorage.getItem("quizzesUsuario"))
@@ -346,7 +360,7 @@ function sucessoCriacao(res) {
   container[0].innerHTML += `
   <section class="infoQuizz"> 
      <h3 class="quizzReady cursor"> Seu Quizz está pronto! </h3>
-        <div class ="quizzReadyImg cursor" style="background-image="linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(${resposta.image});" ">
+        <div class ="quizzReadyImg cursor" style="background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(${resposta.image});width: 50%;margin-bottom: 45px;min-height: 300px;">
           <h1 class="quizzReadyTitle">${resposta.title}</h1>
          </div>
            <button class="cursor" onclick="initiateQuizz(${resposta.id})"> Acessar o Quizz </button>
@@ -468,11 +482,12 @@ function selectOption(option) {
         for (let p = 0; p < globalResponse.data.levels.length; p++) {
             if (porcentagemAcertos >= globalResponse.data.levels[p].minValue) {
                 maior = p
+                console.log(respostaCorreta)
             }
 
 
         }
-
+        console.log(maior)
         //Tela de finalização do quizz
         insideQuizz[0].innerHTML += `
         <div class="resultado-perguntas">
@@ -487,7 +502,8 @@ function selectOption(option) {
 
     <button onclick="reiniciarQuizz(${globalResponse.data.id})"class="reiniciar-quizz cursor">Reiniciar Quizz</button>
     <p class="voltar-home cursor" onclick="reload()">Voltar pra home</p>`
-        optionVisible = 1
+        optionVisible = 1;
+        respostaCorreta = 0;
     }
 
 
